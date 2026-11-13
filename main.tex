@@ -1,0 +1,728 @@
+\documentclass[10pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{url}
+\urlstyle{same}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalise,nameinlink,noabbrev]{cleveref}
+\renewcommand{\bfdefault}{m}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Dir}{Dirichlet}
+\DeclareMathOperator{\Var}{Var}
+\newcommand{\R}{\mathbb R}
+\newcommand{\E}{\mathbb E}
+\newcommand{\T}{\mathsf T}
+\newcommand{\Lag}{\mathcal L}
+\newcommand{\Jac}{\mathcal J}
+\title{Nested beta-Laguerre ensembles}
+\author{Yitzchak Shmalo}
+\address{The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yitzchak.shmalo@gmail.com}
+\date{}
+\subjclass[2020]{60B20, 47B36, 33C45}
+\keywords{Beta ensembles, Laguerre ensemble, Jacobi matrix, interlacing}
+\begin{document}
+\begin{abstract}
+Reversal and transposition of the Dumitriu--Edelman bidiagonal model
+give one infinite Jacobi matrix whose leading blocks have beta-Laguerre
+spectra at every size, with any fixed integrable hard-edge power.
+This elementary consequence of the finite model gives a positive
+Laguerre answer to Vir\'ag's question about nested ensembles.
+The antisymmetric Gaussian beta family admits the same kind of coupling.
+We distinguish these constructions from full corners processes and
+operator-limit couplings, and prove several obstructions under specified
+spectral-weight, independence, or principal-block assumptions.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+Fix an inverse temperature $\beta>0$.
+Vir\'ag's coupling of the beta-Hermite ensembles
+\cite[Theorem~4.1, p.~5 of the arXiv text]{Virag} gives one random
+measure whose degree-$n$ orthogonal polynomial has the $n$-point
+beta-Hermite zero distribution for every positive integer $n$.
+Question~2 on p.~6 of that text asks whether other Dyson beta-ensembles,
+or other natural random matrix models, admit such a coupling.
+Here nesting means that there is a single real symmetric Jacobi matrix
+$J$, with positive off-diagonal entries, whose actual leading
+$n\times n$ block $J_n$ has the prescribed eigenvalue distribution
+for every $n$. All sizes use the same spectral units.
+
+This requirement contains more information than interlacing. Write
+$h_i=J_{ii}$ and $c_i=J_{i,i+1}=J_{i+1,i}$. If
+$P_n(z)=\det(zI_n-J_n)$, where $I_n$ is the identity matrix, then
+\begin{equation}\label{eq:rec}
+ P_0=1,\qquad P_1=z-h_1,\qquad
+ P_n=(z-h_n)P_{n-1}-c_{n-1}^2P_{n-2},
+\end{equation}
+with one sequence $h_i\in\R$, $c_i>0$. An arbitrary interlacing array
+need not satisfy this recurrence with a scalar coefficient of $P_{n-2}$.
+Choosing a separate tridiagonalisation or orthogonality measure at each
+size does not ensure a common sequence either. Vir\'ag's construction
+reverses the Hermite coefficients and removes the size normalisation:
+the retained diagonal entries have law $N(0,2/\beta)$, the normal law
+with mean $0$ and variance $2/\beta$, and the $i$th off-diagonal has law
+$\beta^{-1/2}\chi_{\beta i}$, where $\chi_\nu$ is the chi law with
+$\nu$ degrees of freedom, defined for real $\nu>0$ in
+\eqref{eq:chidensity}. Here and below
+$\Delta(x)=\prod_{i<j}(x_j-x_i)$ for increasing coordinates. The
+spectra of this construction have density
+proportional to $\Delta(x)^\beta\exp(-\beta\sum_i x_i^2/4)$.
+Dividing each block by its own $\sqrt n$ destroys literal nesting;
+a common deterministic scale does not.
+
+The Laguerre construction is equally explicit. For $\beta>0$, put
+$\theta=\beta/2$. For $a>-1$, let $\Lag_{n,\beta,a}$ denote the probability
+law on $0<x_1<\cdots<x_n$ with density
+\begin{equation}\label{eq:lag}
+ \frac{1}{Z_{n,\beta,a}}\Delta(x)^\beta
+ \prod_{j=1}^n x_j^{\theta(a+1)-1}e^{-\theta x_j},
+\end{equation}
+where $Z_{n,\beta,a}$ is its normalising integral.
+
+\begin{theorem}\label{thm:main}
+Fix $\beta>0$ and $a>-1$. Take mutually independent variables
+\begin{equation}\label{eq:chi}
+ d_i=\beta^{-1/2}\chi_{\beta(a+i)},\qquad
+ \ell_i=\beta^{-1/2}\chi_{\beta i},\qquad i\geq1.
+\end{equation}
+Let $B$ be lower bidiagonal with $B_{ii}=d_i$ and
+$B_{i+1,i}=\ell_i$, and let $B^\T$ be its transpose. The matrix
+product $L=BB^\T$, defined entry by entry, is a Jacobi matrix,
+and every leading block $L_n$ has eigenvalue law $\Lag_{n,\beta,a}$.
+These spectra strictly interlace. Almost surely $L$ is essentially
+self-adjoint on the finitely supported sequences; its closure is
+nonnegative. The spectral measure at the first coordinate has
+degree-$n$ orthogonal polynomial zeros with law $\Lag_{n,\beta,a}$
+for all $n$ simultaneously.
+\end{theorem}
+
+The finite-size ingredient is Dumitriu--Edelman's Laguerre model
+\cite[Theorem~3.4]{DE}. The reversal, transposition, boundary identity,
+and parameter matching in the proof are elementary. Every integrable
+fixed hard-edge power $\alpha>-1$ occurs by taking
+$a=(\alpha+1)/\theta-1$. The effective column parameter is $n+a$,
+not a fixed number of columns. \Cref{cor:anti} gives another example,
+the antisymmetric Gaussian beta family, from its bidiagonal structure.
+Thus the answer to the existential question is positive for these
+families. A classification of all fixed-weight potentials is a separate
+problem.
+
+Tridiagonal random matrix methods begin with Trotter~\cite{Trotter};
+Dumitriu--Edelman~\cite{DE} provide the all-beta Hermite and Laguerre
+models. Finite Jacobi models are given by Killip--Nenciu
+\cite[Theorem~2]{KN} and Edelman--Sutton
+\cite[Definitions~1.6, 1.8 and Theorem~4.1]{ES}.
+The antisymmetric finite model is Dumitriu--Forrester's
+\cite[equation~(1.4) and Theorem~1.1]{DF}.
+Full corners laws and projective interlacing arrays appear in
+Gorin--Shkolnikov~\cite[Definition~1.1]{GS}, Borodin--Gorin
+\cite[Definition~1.1]{BG}, Neretin~\cite[Theorem~1.3]{Neretin},
+and Assiotis--Najnudel~\cite[Theorems~1.13 and 1.16]{AN}.
+Assiotis~\cite[Theorem~1.1 and Corollary~1.4]{Assiotis} establishes
+Laguerre and Jacobi intertwinings for $\beta\geq1$ with specified
+parameter shifts. Bufetov--Kawamoto~\cite{BK} at $\beta=2$ and
+Kawamoto--Shibukawa~\cite[equation~(1.6) and Theorems~1.7--1.8]{KS}
+for $\beta\geq1$ give intertwining kernels that keep the hard-edge
+parameter fixed. These kernels are not the ordinary link
+\eqref{eq:DA}: they compose ordinary deletion with a kernel acting in
+the same dimension. These array and kernel results impose different
+requirements from a common Jacobi recurrence. The dimension obstruction
+for full corners laws is already described in \cite[Section~1.5]{BG}.
+
+Operator-limit couplings also have a different purpose.
+Ram\'irez--Rider--Vir\'ag~\cite{RRV} obtain stochastic Airy limits
+from tridiagonal models. Valk\'o--Vir\'ag
+\cite[Proposition~20 and Theorem~21]{VVSine} give a finite circular
+Dirac representation and a circular Jacobi construction, the latter
+stated there as a theorem of Bourgade, Nikeghbali and Rouault.
+Their subsequent coupling \cite[Theorem~1]{VVCirc} uses size-dependent
+stopping-time arrays and convergence of inverse operators in
+Hilbert--Schmidt norm. Krishnapur--Rider--Vir\'ag
+\cite[Proposition~2 and Theorem~1]{KRV} give canonical finite
+tridiagonal densities and stochastic Airy limits for uniformly convex
+polynomial potentials. None of these operator-limit statements asserts
+that all finite matrices are leading blocks of one matrix.
+
+After the preliminaries, we prove \cref{thm:main} and the antisymmetric
+corollary. We then give the dimension obstruction, the parameter shifts
+for ordinary corners links, a failed reversed Jacobi candidate, a
+unitary principal-block obstruction, and two restricted Gaussian
+characterisations. The final section asks about beta-Jacobi laws,
+one-cut potentials, and fixed-weight classifications.
+
+\section{Preliminaries}
+Write $J_{ii}=h_i$ and $J_{i,i+1}=J_{i+1,i}=c_i>0$ for a Jacobi matrix.
+Expansion at the last row gives \eqref{eq:rec}. It follows by induction
+that consecutive polynomials have no common zero: such a zero would
+propagate to $P_0=1$. Together with Cauchy interlacing, this gives
+strict interlacing of consecutive spectra.
+
+For a self-adjoint $J$ on $\ell^2(\mathbb N)$, its spectral measure
+$\mu$ at $e_1$, the first coordinate vector, is characterised by
+$\langle e_1,f(J)e_1\rangle=\int f\,d\mu$ for bounded Borel functions
+$f$. Every power of $J$ maps finitely supported vectors to finitely
+supported vectors. Thus $\mu$ has moments of every order.
+The recurrence expresses each coordinate vector as a polynomial in
+$J$ applied to $e_1$, and the resulting orthonormal polynomials have
+monic multiples $P_n$. This supplies the random-measure formulation
+once essential self-adjointness is established.
+
+We use the rate convention
+$\operatorname{Gamma}(k,r)$ for the density
+$r^k t^{k-1}e^{-rt}/\Gamma(k)$ on $t>0$, with shape $k>0$ and rate
+$r>0$. For $\nu>0$, the chi law is defined by
+$\chi_\nu^2\sim\operatorname{Gamma}(\nu/2,1/2)$; its density is
+\begin{equation}\label{eq:chidensity}
+ \frac{2^{1-\nu/2}}{\Gamma(\nu/2)}u^{\nu-1}e^{-u^2/2},\qquad u>0.
+\end{equation}
+In particular, \eqref{eq:chi} means
+$d_i^2\sim\operatorname{Gamma}(\theta(a+i),\theta)$ and
+$\ell_i^2\sim\operatorname{Gamma}(\theta i,\theta)$.
+
+In Dumitriu--Edelman's notation, the size-$n$ lower bidiagonal matrix
+$D$ has independent entries
+\begin{equation}\label{eq:DE}
+ D_{jj}\sim\chi_{2A-\beta(j-1)},\qquad
+ D_{j+1,j}\sim\chi_{\beta(n-j)},\qquad 1\leq j<n,
+\end{equation}
+with the diagonal formula also used at $j=n$.
+The condition is $A>\theta(n-1)$. Their theorem gives the ordered
+eigenvalue density of $DD^\T$ as
+\begin{equation}\label{eq:DEdensity}
+ C\Delta(t)^\beta\prod_{j=1}^n
+ t_j^{A-p_n}e^{-t_j/2},\qquad p_n=1+\theta(n-1),
+\end{equation}
+where $C$ is a positive normalising constant. All unspecified constants
+in densities below likewise denote positive normalising constants.
+
+\section{The Laguerre construction}
+\begin{proof}[Proof of the finite-block assertion in \cref{thm:main}]
+Put $\ell_0=0$. Direct multiplication gives
+\begin{equation}\label{eq:entries}
+ L_{ii}=d_i^2+\ell_{i-1}^2,\qquad L_{i,i+1}=d_i\ell_i.
+\end{equation}
+The first $n$ rows of $B$ vanish beyond column $n$. Consequently,
+if $B_n$ is its leading block, then $L_n=B_nB_n^\T$ exactly.
+In contrast, the leading block of $B^\T B$ is
+$B_n^\T B_n+\ell_n^2 e_ne_n^\T$.
+
+Let $R_n$ reverse the $n$ coordinates and set
+$C_n=R_nB_n^\T R_n$. The diagonal chi degrees of $\sqrt\beta C_n$
+are $\beta(a+n),\ldots,\beta(a+1)$; its subdiagonal degrees are
+$\beta(n-1),\ldots,\beta$. All these entries are independent.
+Thus \eqref{eq:DE} applies with
+\begin{equation}\label{eq:parameters}
+ A_n=\theta(n+a),\qquad p_n=1+\theta(n-1),\qquad m_n=n+a.
+\end{equation}
+Here $m_n=2A_n/\beta$ is the effective column count; it need not be
+an integer. The condition on $A_n$ is exactly $a>-1$, and
+$A_n-p_n=\theta(a+1)-1$. Moreover,
+$C_n^\T C_n=R_nL_nR_n$, and $C_nC_n^\T$ has the same eigenvalues
+as $C_n^\T C_n$. Applying \eqref{eq:DEdensity} and changing
+$t_j=\beta x_j$, with Jacobian $\beta^n$, proves \eqref{eq:lag}.
+The Vandermonde and power factors only contribute further constants
+under this common scale change.
+
+The quantities $A_n,p_n,m_n$ depend on $n$. The laws in \eqref{eq:chi},
+and every retained entry in \eqref{eq:entries}, do not. Positivity of
+$d_i,\ell_i$ makes $L_n$ positive definite and its off-diagonal
+entries positive. The recurrence argument above gives strict
+interlacing. The single infinite sequence defines all joint laws,
+which are consistent under deletion of the highest levels.
+\end{proof}
+
+The density of the matrix entries gives another useful description;
+the Jacobi entries themselves are dependent.
+\begin{lemma}\label{lem:entrydensity}
+Set $t_i=L_{ii}$ and $c_i=L_{i,i+1}$. On the cone of positive definite
+Jacobi matrices, let $d_i,\ell_i$ be the positive Cholesky coordinates,
+determined by $d_1^2=t_1$, $\ell_i=c_i/d_i$ and
+$d_{i+1}^2=t_{i+1}-\ell_i^2$. Relative to
+$dt_1\cdots dt_n\,dc_1\cdots dc_{n-1}$, the density of $L_n$ is
+\begin{equation}\label{eq:entrydensity}
+ C e^{-\theta\sum_i t_i}
+ \left(\prod_{i=1}^{n-1}c_i^{\beta i-1}d_i^{\beta a-2}\right)
+ d_n^{\beta(a+n)-2}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+By \eqref{eq:chidensity}, the primitive density is
+\[
+ C e^{-\theta(\sum_i d_i^2+\sum_i\ell_i^2)}
+ \prod_{i=1}^n d_i^{\beta(a+i)-1}
+ \prod_{i=1}^{n-1}\ell_i^{\beta i-1}.
+\]
+Order the source variables as $(d_1,\ell_1,d_2,\ell_2,\ldots,d_n)$
+and the targets as $(t_1,c_1,t_2,c_2,\ldots,t_n)$.
+The derivative matrix is lower triangular, with alternating diagonal
+entries $2d_i,d_i$ and final entry $2d_n$. Its determinant is
+$2^n d_n\prod_{i<n}d_i^2$. Divide by this determinant and substitute
+$\ell_i=c_i/d_i$. For $i<n$ the power of $d_i$ becomes
+$\beta(a+i)-1-2-(\beta i-1)=\beta a-2$; the final power is
+$\beta(a+n)-2$. The sum of squares is $\sum_i t_i$.
+\end{proof}
+
+\begin{lemma}\label{lem:operator}
+The matrix $L$ in \cref{thm:main} is almost surely essentially
+self-adjoint on finitely supported sequences and has nonnegative closure.
+\end{lemma}
+\begin{proof}
+For $X\sim\chi_\nu^2$, $\E e^{X/4}=2^{\nu/2}$. Applied to the
+degrees in \eqref{eq:chi}, this gives, for sufficiently large $K$,
+$\mathbb P(d_i^2>Ki)+\mathbb P(\ell_i^2>Ki)\leq C e^{-ci}$
+with $c>0$. Borel--Cantelli implies $d_i,\ell_i=O(\sqrt i)$ almost
+surely. Hence $c_i=d_i\ell_i=O(i)$ and $\sum_i c_i^{-1}=\infty$.
+
+For completeness, suppose a nonzero square-summable vector $u$
+solves the adjoint equation $Lu=zu$ with $\operatorname{Im}z\ne0$.
+Summing the recurrence against $\bar u_i$ through $n$ and taking
+imaginary parts gives
+\[
+ |\operatorname{Im}z|\sum_{i=1}^n|u_i|^2
+ \leq c_n|u_nu_{n+1}|.
+\]
+The left side is bounded below by a positive constant eventually.
+It follows that $\sum_n c_n^{-1}\leq C\sum_n|u_nu_{n+1}|<\infty$,
+a contradiction. Both deficiency spaces vanish. Finally
+$\langle f,Lf\rangle=\|B^\T f\|^2\geq0$ on finitely supported $f$,
+so the closure is nonnegative.
+\end{proof}
+The spectral-measure discussion in the preliminaries now completes
+\cref{thm:main}, including support in $[0,\infty)$.
+
+This coupling has a different adjacent-level law from ordinary
+invariant Wishart corners. Indeed $\E L_{11}=a+1$, whereas
+$\E\tr L_2/2=a+2$. If the vector of spectral weights at the deleted endpoint
+were symmetric Dirichlet and independent of the
+eigenvalues, the expected scalar minor would equal the latter number.
+
+\section{The antisymmetric Gaussian case}
+\begin{corollary}\label{cor:anti}
+Fix $\beta>0$. Let $H$ be the zero-diagonal Jacobi matrix with
+independent off-diagonal entries $r_i>0$ satisfying
+$r_i^2\sim\operatorname{Gamma}(i\beta/4,1)$. The size-one block is $(0)$.
+Its leading block of size $N\geq2$ has eigenvalues
+$\pm\lambda_1,\ldots,\pm\lambda_m$, and one
+zero if $N$ is odd, where $m=\lfloor N/2\rfloor$ and
+$0<\lambda_1<\cdots<\lambda_m$. Their density is
+\begin{equation}\label{eq:anti}
+ C e^{-\sum_{j=1}^m\lambda_j^2}\Delta(\lambda_1^2,\ldots,\lambda_m^2)^\beta
+ \prod_{j=1}^m\lambda_j^{\eta_N},\qquad
+ \eta_N=\begin{cases}\beta/2-1,&N\text{ even},\\
+ 3\beta/2-1,&N\text{ odd}.\end{cases}
+\end{equation}
+Thus the antisymmetric Gaussian beta family nests, with strict
+interlacing of the full spectra.
+\end{corollary}
+\begin{proof}
+Reorder odd coordinates before even coordinates. Then
+$H_N$ becomes $\left(\begin{smallmatrix}0&Q\\Q^\T&0\end{smallmatrix}\right)$,
+where $Q$ has diagonal entries $r_{2j-1}$ and subdiagonal entries
+$r_{2j}$. Put $u_j=r_{2j-1}^2$ and $v_j=r_{2j}^2$, so their
+shapes are $\theta(j-1/2)$ and $\theta j$, respectively, all at rate~1.
+
+For $N=2m$, $Q$ is square. The matrix $Q/\sqrt\theta$ is exactly
+$B_m$ from \cref{thm:main} with $a=-1/2$. Therefore the squared
+positive eigenvalues $s_j=\lambda_j^2$ have density
+$C\Delta(s)^\beta\prod_j s_j^{\theta/2-1}e^{-s_j}$.
+
+For $N=2m+1$, $Q$ has $m+1$ rows and $m$ columns.
+The diagonal entries of $Q^\T Q$ are $u_j+v_j$ and its off-diagonal
+entries are $\sqrt{v_j u_{j+1}}$. We compute its Cholesky law.
+At step $j$ let the residual diagonal contribution be $w_j$,
+starting with $w_1=u_1$, and define
+$D_j^2=w_j+v_j$ for $1\leq j\leq m$, and
+\[
+ E_j^2=\frac{v_j u_{j+1}}{w_j+v_j},\qquad
+ w_{j+1}=\frac{w_j u_{j+1}}{w_j+v_j}\qquad(1\leq j<m).
+\]
+Inductively $w_j$ has shape $\theta/2$ and is independent of
+the preceding Cholesky entries and unused variables. The ratio
+$T_j=w_j/(w_j+v_j)$ has the beta law on $(0,1)$ with density
+proportional to $t^{\theta/2-1}(1-t)^{\theta j-1}$, and it is
+independent of $D_j^2$, which has shape
+$\theta(j+1/2)$. Since $u_{j+1}$ has that same shape, the
+beta--gamma splitting identity makes $T_j u_{j+1}$ and
+$(1-T_j)u_{j+1}$ independent gamma variables of shapes
+$\theta/2$ and $\theta j$. This identity follows directly from
+the change of variables $(x,y)\mapsto(x+y,x/(x+y))$, whose
+absolute inverse Jacobian is $x+y$.
+The induction proves independence of all $D_j^2,E_j^2$,
+with shapes $\theta(j+1/2),\theta j$. Thus the Cholesky factor
+divided by $\sqrt\theta$ is the Laguerre factor with $a=1/2$,
+and the density of the nonzero squared eigenvalues is
+$C\Delta(s)^\beta\prod_j s_j^{3\theta/2-1}e^{-s_j}$.
+
+Finally $ds_1\cdots ds_m=2^m\prod_j\lambda_j\,d\lambda_1\cdots d\lambda_m$
+gives \eqref{eq:anti} in both parities. The relation between these
+antisymmetric laws and Laguerre singular values is already in
+\cite[Section~6]{DF}. The result agrees with the
+Dumitriu--Forrester model: their $\widetilde\chi_k^2$ has shape
+$k/2$ at rate~1, and reversal of their off-diagonal sequence
+$\widetilde\chi_{(N-i)\beta/2}$ gives $r_i$. If $A$ is the reversed
+real skew matrix and $D$ is the diagonal unitary with successive phase
+ratio $-\mathrm i$, then $D^*(\mathrm iA)D$ is the positive Jacobi form,
+up to an overall sign, which does not change the paired spectrum.
+The one infinite sequence $r_i$ supplies nesting, and
+\eqref{eq:rec} gives strict interlacing.
+\end{proof}
+
+\section{Obstructions and distinctions}
+This section separates nesting from full corners laws and ordinary
+corners links, and proves the obstructions listed in the introduction,
+each under its stated hypotheses.
+
+\subsection{Full corners laws}
+\begin{proposition}\label{prop:dimension}
+For $N\geq3$, the spectra of all leading blocks of one real symmetric
+tridiagonal $N\times N$ matrix cannot have a joint law absolutely
+continuous in the $N(N+1)/2$ array coordinates. No independence
+assumption on the matrix entries is required.
+\end{proposition}
+\begin{proof}
+The entries form a space of dimension $2N-1$. The map to the ordered
+eigenvalues of each leading block is Lipschitz by the eigenvalue
+perturbation inequality, so the map to the entire array is Lipschitz.
+On a bounded parameter box, $O(\varepsilon^{-(2N-1)})$ cubes of
+side $\varepsilon$ cover its domain. Their images have total
+$D$-dimensional volume $O(\varepsilon^{D-(2N-1)})$, where
+$D=N(N+1)/2>2N-1$. Hence the image has measure zero; a countable
+union of such boxes gives the assertion.
+\end{proof}
+For fixed real symmetric bandwidth $w$, the parameter count is
+$(w+1)N-w(w+1)/2$ for $N>w$, and the same argument applies when
+this is less than $D$. This excludes full absolutely continuous
+corners laws, including Hermite corners, but does not exclude
+singular interlacing couplings of their one-level marginals.
+
+\subsection{The ordinary corners link}
+For increasing $x=(x_1,\ldots,x_n)$, write $y\prec x$ for
+$x_1<y_1<x_2<\cdots<y_{n-1}<x_n$, and $1_{\{y\prec x\}}$ for the
+indicator of this set. The ordinary
+Dixon--Anderson link \cite{Anderson}, \cite[Proposition~4.2.1]{Forrester},
+\cite[Lemma~1.1]{KS} is
+\begin{equation}\label{eq:DA}
+ K_n^\theta(x,dy)=\frac{\Gamma(n\theta)}{\Gamma(\theta)^n}
+ \frac{\Delta(y)}{\Delta(x)^{2\theta-1}}
+ \prod_{i=1}^n\prod_{j=1}^{n-1}|x_i-y_j|^{\theta-1}
+ 1_{\{y\prec x\}}\,dy.
+\end{equation}
+We record the underlying change of variables to specify the link precisely.
+\begin{lemma}\label{lem:residues}
+If $q=(q_1,\ldots,q_n)$ has Dirichlet parameters $s_i>0$ and
+$S=\sum_i s_i$, the roots $y$ of $\sum_i q_i/(z-x_i)=0$ have density
+\begin{equation}\label{eq:generalDA}
+ \frac{\Gamma(S)}{\prod_i\Gamma(s_i)}
+ \frac{\Delta(y)\prod_{i,j}|x_i-y_j|^{s_i-1}}
+ {\prod_{i<k}(x_k-x_i)^{s_i+s_k-1}}
+ 1_{\{y\prec x\}}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The rational function is strictly decreasing between successive poles
+and has one zero in each gap. Conversely its residues are
+$q_i=\prod_j(x_i-y_j)/\prod_{k\ne i}(x_i-x_k)>0$; expansion at
+infinity gives $\sum_i q_i=1$. Differentiation yields
+$\partial q_i/\partial y_j=-q_i/(x_i-y_j)$. The Cauchy determinant
+then gives
+$|\partial(q_1,\ldots,q_{n-1})/\partial(y_1,\ldots,y_{n-1})|
+=\Delta(y)/\Delta(x)$. Substitution in
+$\Gamma(S)\prod_iq_i^{s_i-1}/\prod_i\Gamma(s_i)$ gives
+\eqref{eq:generalDA}, including its normalisation.
+\end{proof}
+Taking $s_i=\theta$ gives \eqref{eq:DA}. The cofactor identity
+\[
+ \frac{\det(zI_{n-1}-J_{n-1})}{\det(zI_n-J_n)}
+ =\langle e_n,(zI_n-J_n)^{-1}e_n\rangle
+ =\sum_i\frac{|v_i(n)|^2}{z-x_i}
+\]
+shows that this link describes deletion when the vector
+$(|v_i(n)|^2)_i$ of endpoint weights is independent of the
+eigenvalues and has the law $\Dir(\theta,\ldots,\theta)$. Here $v_i$
+are unit eigenvectors.
+
+\begin{proposition}\label{prop:shift}
+Let $\Jac_{n,\beta;p,q}$ have density
+$C\Delta(x)^\beta\prod_i x_i^p(1-x_i)^q$ on $(0,1)$, where
+$p,q>-1$. Then
+\[
+ \Jac_{n,\beta;p,q}K_n^\theta
+ =\Jac_{n-1,\beta;p+\theta,q+\theta}.
+\]
+For the Laguerre density $C\Delta(x)^\beta\prod_i x_i^\alpha e^{-cx_i}$,
+with $\alpha>-1$ and $c>0$, the image has exponent $\alpha+\theta$
+and the same rate $c$.
+\end{proposition}
+\begin{proof}
+Multiply the Jacobi density by \eqref{eq:DA}. The factors involving
+$x$ are $\Delta(x)\prod_i x_i^p(1-x_i)^q
+\prod_{i,j}|x_i-y_j|^{\theta-1}$. Apply \eqref{eq:generalDA}
+with fixed poles $(0,y_1,\ldots,y_{n-1},1)$ and parameters
+$(p+1,\theta,\ldots,\theta,q+1)$. Its integral in $x$ is a constant
+times $\Delta(y)^{2\theta-1}\prod_j y_j^{p+\theta}(1-y_j)^{q+\theta}$.
+The remaining factor $\Delta(y)$ proves the assertion.
+
+For Laguerre, use the same Jacobi identity on $(0,R)$ with weight
+$x^\alpha(1-x/R)^{cR}$. The image has weight
+$y^{\alpha+\theta}(1-y/R)^{cR+\theta}$.
+The top densities converge in $L^1$ after normalisation, since
+$(1-x/R)^{cR}\leq e^{-cx}$ and the Vandermonde has polynomial
+growth. Applying the fixed Markov kernel preserves convergence
+in total variation; the lower densities converge by the same
+domination. Letting $R\to\infty$ proves the claim.
+\end{proof}
+Fixed powers therefore fail to be coherent under these particular
+links. An all-size full-rank Jacobi chain with ordinary links would
+require $p_n=p_1-(n-1)\theta$ and $q_n=q_1-(n-1)\theta$, eventually
+violating integrability. The analogous statement holds for the
+Laguerre power. This is compatible with \cref{thm:main}, whose
+endpoint weights do not impose the ordinary link. Fixed-power
+Laguerre coherence under a different kernel is proved in \cite{BK}
+and \cite{KS}; those kernels are not of the form \eqref{eq:DA}.
+
+\subsection{Reversing the finite Jacobi model}
+\begin{proposition}\label{prop:KN}
+Fix $p,q>-1$ and $\beta>0$. For any $N\geq2$, reversing the
+size-$N$ Killip--Nenciu Jacobi matrix with these fixed powers
+does not give the target size-one law at its leading scalar entry.
+\end{proposition}
+\begin{proof}
+Use the source coordinates on $(-2,2)$ and put
+$S=p+q+2$, $d=p-q$. Its beta law $\mathrm B(s,t)$ on $(-1,1)$
+has density proportional to $(1-u)^{s-1}(1+u)^{t-1}$, and mean
+$(t-s)/(s+t)$. The source parameters called $a,b$ are $q,p$.
+Equations~(1.11)--(1.12) of \cite{KN} give independent
+$t=\alpha_{2N-3}$, $u=\alpha_{2N-2}$, $v=\alpha_{2N-4}$ with
+\[
+ \E t=\frac{\theta-S}{\theta+S},\qquad
+ \E u=\frac dS,\qquad \E v=\frac d{S+2\theta},
+ \qquad b_N=(1-t)u-(1+t)v.
+\]
+The reversed scalar on $(0,1)$ is $X=(b_N+2)/4$, so
+$\E X=1/2+d/[2(S+\beta)]$.
+For $d\ne0$ this differs from the beta$(p+1,q+1)$ mean
+$1/2+d/(2S)$.
+
+If $p=q$, the means vanish before translation. The same beta laws give
+\[
+ \E u^2=\frac1{S+1},\quad \E v^2=\frac1{S+2\theta+1},\quad
+ \E(1-t)^2=\frac{4S(S+1)}{(S+\theta)(S+\theta+1)},\quad
+ \E(1+t)^2=\frac{4\theta(\theta+1)}{(S+\theta)(S+\theta+1)}.
+\]
+Independence gives $\Var X=1/[4(S+\beta+1)]$, whereas the
+target variance is $1/[4(S+1)]$. These differ for $\beta>0$.
+\end{proof}
+This proposition concerns one specified candidate. It does not
+exclude another, possibly dependent, sequence of Jacobi coefficients.
+
+\subsection{Unitary principal blocks}
+\begin{proposition}\label{prop:unitary}
+If every $U_n$ is unitary and is the leading block of $U_{n+1}$,
+then all the matrices $U_n$ are diagonal.
+\end{proposition}
+\begin{proof}
+Write $U_{n+1}=\left(\begin{smallmatrix}U_n&v\\w^*&z\end{smallmatrix}\right)$.
+The upper-left identities in $U_{n+1}U_{n+1}^*=I$ and
+$U_{n+1}^*U_{n+1}=I$ give $vv^*=ww^*=0$. Hence $v=w=0$
+and $|z|=1$. Induction from $n=1$ proves the assertion.
+\end{proof}
+In particular, irreducible Cantero--Moral--Vel\'azquez (CMV) or unitary
+Hessenberg models cannot
+have unitary leading blocks at every size. In the finite circular
+model \cite[Theorem~1]{KN}, the last Verblunsky coefficient lies
+on the unit circle and earlier coefficients lie in the disk, with
+laws depending on terminal size. Changing the terminal coefficient
+is a different operation from taking a principal block.
+The proposition does not by itself exclude arbitrary dependent
+diagonal phase sequences specified only through their spectra.
+
+\subsection{Two restricted Gaussian characterisations}
+\begin{proposition}\label{prop:canonical}
+Let $V\in C^2(\R)$ and $\beta>0$. At each size, consider the
+canonical spectral model with normalisable eigenvalue density
+$C\Delta(x)^\beta e^{-\sum_i V(x_i)}$ and a $\Dir(\theta,\ldots,\theta)$ vector of weights at the deleted
+endpoint, independent of the eigenvalues. If the two diagonal entries and
+the positive off-diagonal entry are independent at size two, then
+$V(x)=\kappa x^2+\delta x+\varepsilon$ with $\kappa>0$.
+Conversely these potentials admit a nested canonical model with
+independent Jacobi entries after reversal.
+\end{proposition}
+\begin{proof}
+Write $J_2=\left(\begin{smallmatrix}h&b\\b&k\end{smallmatrix}\right)$,
+$b>0$. For eigenvalues $\lambda_1<\lambda_2$ and one endpoint
+weight $q$, $b=(\lambda_2-\lambda_1)\sqrt{q(1-q)}$.
+The absolute Jacobian from $(\lambda_1,\lambda_2,q)$ to $(h,k,b)$
+is $(\lambda_2-\lambda_1)^2/(2b)$, obtained by differentiating
+$h=q\lambda_1+(1-q)\lambda_2$, $k=(1-q)\lambda_1+q\lambda_2$
+and the displayed formula for $b$.
+The entry density is consequently
+$Cb^{\beta-1}e^{-\tr V(J_2)}$.
+
+Independence makes $\tr V(J_2)$ a sum of functions of $h,k,b$.
+Positivity and continuity extend the corresponding cross-ratio
+identities from almost everywhere to the open product domain.
+Subtracting the identity at another positive value of $b$ and
+letting that value tend to zero shows
+$\tr V(J_2)-V(h)-V(k)=g(b)$.
+Set $k=h$ to obtain
+$V(h+b)+V(h-b)-2V(h)=g(b)$. Division by $b^2$ and passage to
+zero gives a constant value of $V''(h)$. Full-line integrability
+forces the quadratic coefficient to be positive.
+
+For the converse the reversed canonical entry density factors as
+\[
+ C_n\exp\left\{-\kappa\sum_i h_i^2-2\kappa\sum_i c_i^2
+                    -\delta\sum_i h_i\right\}
+ \prod_{i=1}^{n-1}c_i^{\beta i-1}.
+\]
+Each retained factor is independent of terminal size. This is a
+shift and scale of the reversed Hermite model. It gives the required
+eigenvalue laws, and the Dirichlet weights at $e_n$ of each reversed
+finite matrix.
+\end{proof}
+The Dirichlet-weight hypothesis is part of this assertion.
+Eigenvalue marginals alone do not determine the entry density used
+in its proof.
+
+\begin{proposition}\label{prop:gaussDA}
+Let $w>0$ be $C^1$ on $\R$, with
+$m_0=\int_\R w<\infty$, $\int_\R |x|w(x)\,dx<\infty$, and a
+finite nonzero size-two partition function. At $\beta=2$, if the
+size-two law with weight $w$ maps under $K_2^1$ to the size-one law
+with the same weight, then $w$ is Gaussian up to translation,
+scale, and a positive constant. The converse holds.
+\end{proposition}
+\begin{proof}
+The unnormalised deletion density is
+\[
+ F(y)=\int_{x<y<z}(z-x)w(x)w(z)\,dx\,dz.
+\]
+Put $A_j(y)=\int_{-\infty}^y x^j w(x)\,dx$ and
+$B_j(y)=\int_y^\infty x^j w(x)\,dx$ for $j=0,1$.
+Then $F=A_0B_1-A_1B_0$, whence
+$F'(y)=w(y)(m_1-ym_0)$, where $m_1=\int_\R xw(x)\,dx$.
+Coherence says $F=Cw$ for $C>0$, so
+$(\log w)'=(m_1-ym_0)/C$ and
+$w(y)=C_0\exp\{-m_0(y-m_1/m_0)^2/(2C)\}$.
+For the converse this is the adjacent deletion law of the shifted
+and scaled Hermite model, whose endpoint weights are Dirichlet.
+\end{proof}
+This is a statement about the ordinary link on the whole real line
+at $\beta=2$. Neither Gaussian characterisation restricts all
+dependent-entry realisations or all possible interlevel links.
+
+\section{Remarks and open problems}
+The constructions rely on size-independent retained coefficients.
+For Laguerre, the independent variables are the Cholesky entries,
+rather than the Jacobi entries. In the antisymmetric case a zero
+diagonal imposes paired eigenvalues, so \eqref{eq:anti} is not an
+unconstrained $N$-particle Hermite density. Both examples are
+elementary consequences of finite bidiagonal models; the extra
+operator argument supplies a single orthogonality measure.
+
+Three questions remain beyond these constructions. For fixed
+$\beta>0$ and $p,q>-1$, does one Jacobi sequence realise
+$\Jac_{n,\beta;p,q}$ for every $n$? \Cref{prop:KN} excludes the
+simple reversal, and \cref{prop:shift} excludes the ordinary link,
+but neither excludes a different dependent sequence.
+For which nonquadratic potentials with a one-cut equilibrium
+measure in the associated large-size scaling can a fixed-weight
+family be nested? Finite canonical models and their operator
+limits do not give prefix consistency. More generally, classify
+the positive weights $w$ on an interval for which
+\[
+ C_n\Delta(x)^\beta\prod_{i=1}^n w(x_i)
+\]
+is the spectrum of every leading block of one Jacobi matrix,
+assuming all partition functions are finite. In this last question
+the spectral weights and dependence between coefficients are
+unrestricted. The restricted obstructions above leave that
+classification undecided.
+
+\section*{Acknowledgements and funding}
+The research presented in this paper was supported by the European Research
+Council (ERC) under the European Union's Horizon Europe research and
+innovation programme (grant agreement No.~101041711), by the Simons
+Foundation as part of the Collaboration on the Mathematical and Scientific
+Foundations of Deep Learning, by Heights Labs, by Convex Nexus Capital, by
+the Israel Science Foundation (grant number 2258/19), and by the Israel
+Science Foundation (ISF Grant 4101/25). Computational resources were
+provided in part by Google Cloud through its education credits program
+(credit 530550103).
+
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent memory in which the agents record claims, proofs, failed attempts and methods, retrieve one another's results, coordinate who works on what, and audit each other's work. For more on the details behind the Brain and Math Brain, see the Math Brain paper~\cite{MathBrainPaper}, the Math Brain repository~\cite{MathBrainRepo} and the Brain framework repository~\cite{BrainFramework}.
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and
+has a management role at Convex Nexus Capital. These entities are included
+in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+OpenAI GPT-6.1 (Codex) wrote the construction and its proof, and an
+independent GPT-6.1 run checked it. Claude Opus~5.5 (Anthropic) set the
+problem, compared the sources and prepared the text. The author is
+responsible for the content of the paper.
+
+\section*{Data availability}
+No data were generated or analysed for this paper. Related material is at
+\url{https://github.com/yspennstate/nested-beta-laguerre}.
+
+The paper is part of the Math Brain project, whose public repository is \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\begin{thebibliography}{99}
+\bibitem{Assiotis} T.~Assiotis, \emph{Intertwinings for general $\beta$-Laguerre and $\beta$-Jacobi processes}, J.\ Theoret.\ Probab.\ 32 (2019), 1880--1891, doi:10.1007/s10959-018-0842-0, arXiv:1609.03764.
+
+\bibitem{Anderson} G.~W.~Anderson, \emph{A short proof of Selberg's generalized beta formula}, Forum Math.\ 3 (1991), no.~4, 415--417, doi:10.1515/form.1991.3.415.
+
+\bibitem{AN} T.~Assiotis and J.~Najnudel, \emph{The boundary of the orbital beta process}, Mosc.\ Math.\ J.\ 21 (2021), no.~4, 659--694, arXiv:1905.08684.
+
+\bibitem{BG} A.~Borodin and V.~Gorin, \emph{General $\beta$ Jacobi corners process and the Gaussian Free Field}, Comm.\ Pure Appl.\ Math.\ 68 (2015), no.~10, 1774--1844, arXiv:1305.3627.
+
+\bibitem{BK} A.~I.~Bufetov and Y.~Kawamoto, \emph{The intertwining property for Laguerre processes with a fixed parameter}, J.\ Stat.\ Phys.\ 192 (2025), article~58, doi:10.1007/s10955-025-03441-w.
+
+\bibitem{DE} I.~Dumitriu and A.~Edelman, \emph{Matrix models for beta ensembles}, J.\ Math.\ Phys.\ 43 (2002), no.~11, 5830--5847, doi:10.1063/1.1507823, arXiv:math-ph/0206043.
+
+\bibitem{DF} I.~Dumitriu and P.~J.~Forrester, \emph{Tridiagonal realization of the antisymmetric Gaussian $\beta$-ensemble}, J.\ Math.\ Phys.\ 51 (2010), no.~9, 093302, doi:10.1063/1.3486071, arXiv:0904.2216.
+
+\bibitem{ES} A.~Edelman and B.~D.~Sutton, \emph{The beta-Jacobi matrix model, the CS decomposition, and generalized singular value problems}, Found.\ Comput.\ Math.\ 8 (2008), no.~2, 259--285, doi:10.1007/s10208-006-0215-9.
+
+\bibitem{Forrester} P.~J.~Forrester, \emph{Log-gases and random matrices}, London Math.\ Soc.\ Monogr.\ Ser.\ 34, Princeton University Press, Princeton, NJ, 2010, doi:10.1515/9781400835416.
+
+\bibitem{GS} V.~Gorin and M.~Shkolnikov, \emph{Multilevel Dyson Brownian motions via Jack polynomials}, Probab.\ Theory Related Fields 163 (2015), 413--463, arXiv:1401.5595.
+
+\bibitem{KS} Y.~Kawamoto and G.~Shibukawa, \emph{The intertwining property for $\beta$-Laguerre processes and integral operators for Jack polynomials}, ALEA Lat.\ Am.\ J.\ Probab.\ Math.\ Stat.\ 23 (2026), 255--273, doi:10.30757/ALEA.v23-10, arXiv:2505.23139.
+
+\bibitem{KN} R.~Killip and I.~Nenciu, \emph{Matrix models for circular ensembles}, Int.\ Math.\ Res.\ Not.\ 2004 (2004), no.~50, 2665--2701, arXiv:math/0410034.
+
+\bibitem{KRV} M.~Krishnapur, B.~Rider and B.~Vir\'ag, \emph{Universality of the stochastic Airy operator}, Comm.\ Pure Appl.\ Math.\ 69 (2016), no.~1, 145--199, doi:10.1002/cpa.21573, arXiv:1306.4832.
+
+\bibitem{Neretin} Yu.~A.~Neretin, \emph{Rayleigh triangles and non-matrix interpolation of matrix beta integrals}, Sb.\ Math.\ 194 (2003), no.~4, 515--540, doi:10.1070/SM2003v194n04ABEH000727, arXiv:math/0301070.
+
+\bibitem{RRV} J.~A.~Ram\'irez, B.~Rider and B.~Vir\'ag, \emph{Beta ensembles, stochastic Airy spectrum, and a diffusion}, J.\ Amer.\ Math.\ Soc.\ 24 (2011), no.~4, 919--944, doi:10.1090/S0894-0347-2011-00703-0, arXiv:math/0607331.
+
+\bibitem{Trotter} H.~F.~Trotter, \emph{Eigenvalue distributions of large Hermitian matrices; Wigner's semi-circle law and a theorem of Kac, Murdock, and Szeg\H{o}}, Adv.\ in Math.\ 54 (1984), no.~1, 67--82, doi:10.1016/0001-8708(84)90037-9.
+
+\bibitem{VVSine} B.~Valk\'o and B.~Vir\'ag, \emph{The Sine$_\beta$ operator}, Invent.\ Math.\ 209 (2017), no.~1, 275--327, doi:10.1007/s00222-016-0709-x, arXiv:1604.04381.
+
+\bibitem{VVCirc} B.~Valk\'o and B.~Vir\'ag, \emph{Operator limit of the circular beta ensemble}, Ann.\ Probab.\ 48 (2020), no.~3, 1286--1316, doi:10.1214/19-AOP1391, arXiv:1710.06988.
+
+\bibitem{Virag} B.~Vir\'ag, \emph{Operator limits of random matrices}, Proceedings of the International Congress of Mathematicians, Seoul 2014, vol.~IV, 247--272, arXiv:1804.06953.
+
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026, \url{https://github.com/yspennstate/math-brain-public}.
+
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research}, October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026, \url{https://github.com/yspennstate/brain-framework-public}.
+
+\end{thebibliography}
+\end{document}
